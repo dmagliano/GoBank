@@ -1,17 +1,20 @@
 package app
 
 import (
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 )
 
 func Start() {
 
+	router := mux.NewRouter()
+
 	//defining routes
-	http.HandleFunc("/hello", hello)
-	http.HandleFunc("/customers", getAllCustomer)
+	router.HandleFunc("/hello", hello)
+	router.HandleFunc("/customers", getAllCustomer)
 
 	//starting server
-	log.Fatalf("error", http.ListenAndServe("localhost:8000", nil))
+	log.Fatalf("error", http.ListenAndServe("localhost:8000", router))
 
 }
